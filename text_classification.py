@@ -9,9 +9,9 @@ import numpy as np
 from datetime import datetime
 
 # Utils
-import joblib
+import joblib, pickle
 @st.cache
-pipe_lr = joblib.load(open("Fake News Detection App.pkl","rb"))
+pipe_lr = pickle.load(open("Fake News Detection App.pkl","rb"))
 
 # Fxn
 def predict(docx):
