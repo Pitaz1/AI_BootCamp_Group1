@@ -5,5 +5,4 @@ plotly
 streamlit
 altair
 matplotlib
-pickle
 joblib
