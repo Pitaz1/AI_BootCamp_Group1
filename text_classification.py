@@ -10,7 +10,7 @@ from datetime import datetime
 
 # Utils
 import joblib, pickle
-pipe_lr = pickle.load(open("Fake News Detection App.pkl","rb"))
+pipe_lr = joblib.load("Fake News Detection App.pkl")
 
 # Fxn
 def predict(docx):
