@@ -9,11 +9,12 @@ import numpy as np
 from datetime import datetime
 
 # Utils
-import joblib 
-#pipe_lr = joblib.load(open("models/emotion_classifier_pipe_lr_03_june_2021.pkl","rb"))
+import joblib
+@st.cache
+pipe_lr = joblib.load(open("Fake News Detection App.pkl","rb"))
 
 # Fxn
-def predict_emotions(docx):
+def predict(docx):
 	results = pipe_lr.predict([docx])
 	return results[0]
 
@@ -37,36 +38,26 @@ def main():
 			col1,col2  = st.columns(2)
 
 			# Apply Fxn Here
-			prediction = predict_emotions(raw_text)
+			prediction = predict(raw_text)
 			probability = get_prediction_proba(raw_text)
-			
-			add_prediction_details(raw_text,prediction,np.max(probability),datetime.now())
 
 			with col1:
 				st.success("Original Text")
 				st.write(raw_text)
 
 				st.success("Prediction")
-				emoji_icon = emotions_emoji_dict[prediction]
-				st.write("{}:{}".format(prediction,emoji_icon))
-				st.write("Confidence:{}".format(np.max(probability)))
+				st.write("{}".format(prediction))
 
 
 
 			with col2:
 				st.success("Prediction Probability")
-				# st.write(probability)
-				proba_df = pd.DataFrame(probability,columns=pipe_lr.classes_)
-				# st.write(proba_df.T)
-				proba_df_clean = proba_df.T.reset_index()
-				proba_df_clean.columns = ["emotions","probability"]
-
-				fig = alt.Chart(proba_df_clean).mark_bar().encode(x='emotions',y='probability',color='emotions')
-				st.altair_chart(fig,use_container_width=True)
+				st.write(probability)
+				
 
 	else:
 		st.subheader("About")
-		st.write("My name is seyi ogunmusire ")
+		st.write("this app is used to dectect fake news ")
 
 
 
