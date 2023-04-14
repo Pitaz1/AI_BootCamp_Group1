@@ -1,0 +1,9 @@
+pandas
+numpy
+scikit-learn
+plotly
+streamlit
+altair
+matplotlib
+pickle
+joblib
